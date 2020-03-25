@@ -45,10 +45,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        //List<ImageView> lista = Arrays.asList(imagenIzq, imagenCen, imagenDer);
-       // List<ImageView> lista = Arrays.asList();
-        //List<Integer> imagenes = Arrays.asList(R.drawable.ic_gift_pizza, R.drawable.ic_gift_beach, R.drawable.ic_gift_music);
-        //Collections.shuffle(lista);
+
 
         /*List<Integer> iconoList= new ArrayList<>();
         iconoList.add(R.drawable.ic_telefono_inteligente);
@@ -61,13 +58,7 @@ public class MainActivity extends AppCompatActivity {
         //center.setImageIcon(iconoList);
 
 
-/*
-        Iterator it = imagenes.iterator();
 
-        mapa = new HashMap<>();
-        for(ImageView el: lista) {
-            mapa.put(el, (int) it.next());
-        }*/
     }
 
 
@@ -76,32 +67,68 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-           public void showMessaje() {
-        Toast.makeText(this, "Ganaste!", Toast.LENGTH_SHORT).show();
-        getCenter().setOnClickListener(new OnClickListener() {
-                                           @Override
-                                           public void onClick(View v) {
-                                               Integer q = imagenesID[rgenerador.nextInt(imagenesID.length)];
-                                               final ImageView iv = (ImageView) findViewById(R.id.imageViewCenter);
+           public void showMessaje(View v) {
+        switch (v.getId()) {
+            case R.id.imageViewCenter:
+                getCenter().setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
-                                               int resource = imagenesID[rgenerador.nextInt(imagenesID.length)];
-                                               iv.setImageResource(resource);
-                                               center = findViewById(R.id.imageViewCenter);
+                        Toast.makeText(MainActivity.this, "Ganaste Premio", Toast.LENGTH_SHORT).show();
+                        Integer q = imagenesID[rgenerador.nextInt(imagenesID.length)];
+                        final ImageView iv = (ImageView) findViewById(R.id.imageViewCenter);
+                        int resource = imagenesID[rgenerador.nextInt(imagenesID.length)];
+                        iv.setImageResource(resource);
 
-                                           }
-                                       });
-        getRight().setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Integer q = imagenesID[rgenerador.nextInt(imagenesID.length)];
-                final ImageView iv = (ImageView) findViewById(R.id.imageViewRight);
 
-                int resource = imagenesID[rgenerador.nextInt(imagenesID.length)];
-                iv.setImageResource(resource);
-                //center = findViewById(R.id.imageViewCenter);
+                        getRight().setClickable(false);
+                        getLeft().setClickable(false);
+                        getCenter().setClickable(false);
 
-            }
-        });
+
+                    }
+
+                });
+                break;
+
+            case R.id.imageViewLeft:
+                getLeft().setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Integer q = imagenesID[rgenerador.nextInt(imagenesID.length)];
+                        final ImageView iv = (ImageView) findViewById(R.id.imageViewLeft);
+                        Toast.makeText(MainActivity.this, "Ganaste Premio", Toast.LENGTH_SHORT).show();
+                        int resource = imagenesID[rgenerador.nextInt(imagenesID.length)];
+                        iv.setImageResource(resource);
+                        getRight().setClickable(false);
+                        getLeft().setClickable(false);
+                        getCenter().setClickable(false);
+
+                    }
+                });
+                break;
+
+            case R.id.imageViewRight:
+                getLeft().setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Integer q = imagenesID[rgenerador.nextInt(imagenesID.length)];
+                        final ImageView iv = (ImageView) findViewById(R.id.imageViewRight);
+                        Toast.makeText(MainActivity.this, "Ganaste Premio", Toast.LENGTH_SHORT).show();
+                        int resource = imagenesID[rgenerador.nextInt(imagenesID.length)];
+                        iv.setImageResource(resource);
+                        getRight().setClickable(false);
+                        getLeft().setClickable(false);
+                        getCenter().setClickable(false);
+
+                    }
+                });
+                break;
+        }
+
+
+
+
 
     }
 
@@ -111,8 +138,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public ImageView getCenter() {
-
-
         return center;
     }
+
+    public ImageView getLeft(){
+        return left;
+    }
+
+
 }
