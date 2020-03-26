@@ -2,8 +2,11 @@ package cl.desafiolatam.desafio1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -25,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.textView)
     TextView title;
+    @BindView(R.id.title_change)
+    TextView titleC;
     @BindView(R.id.imageViewCenter)
     ImageView center;
     @BindView(R.id.imageViewLeft)
@@ -35,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView right;
     @BindView(R.id.imageViewReplay)
     ImageView replay;
+
 
     private static final Random rgenerador = new Random();
     private static final Integer[] imagenesID =
@@ -47,43 +53,35 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
 
-        /*List<Integer> iconoList= new ArrayList<>();
-        iconoList.add(R.drawable.ic_telefono_inteligente);
-        iconoList.add(R.drawable.ic_gift_beach);
-        iconoList.add(R.drawable.ic_boleto);
-        iconoList.add(R.drawable.ic_gift_music);
-        iconoList.add(R.drawable.ic_gift_pizza);
-        iconoList.add(R.drawable.ic_viajes);
-        Collections.shuffle(iconoList);*/
-        //center.setImageIcon(iconoList);
-
-
-
     }
 
 
-
-    @OnClick({R.id.imageViewRight,R.id.imageViewCenter,R.id.imageViewLeft})
+    @OnClick({R.id.imageViewRight,R.id.imageViewCenter,R.id.imageViewLeft,R.id.imageViewReplay})
 
 
 
            public void showMessaje(View v) {
+
         switch (v.getId()) {
             case R.id.imageViewCenter:
                 getCenter().setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
-                        Toast.makeText(MainActivity.this, "Ganaste Premio", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(MainActivity.this, "Ganaste Premio", Toast.LENGTH_SHORT).show();
                         Integer q = imagenesID[rgenerador.nextInt(imagenesID.length)];
                         final ImageView iv = (ImageView) findViewById(R.id.imageViewCenter);
                         int resource = imagenesID[rgenerador.nextInt(imagenesID.length)];
                         iv.setImageResource(resource);
-
-
                         getRight().setClickable(false);
                         getLeft().setClickable(false);
                         getCenter().setClickable(false);
+
+
+                            titleC.setText("¡Felicidades, ganaste!!!!");
+
+
+                        Log.e("ques Q", String.valueOf(resource));
 
 
                     }
@@ -97,32 +95,45 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         Integer q = imagenesID[rgenerador.nextInt(imagenesID.length)];
                         final ImageView iv = (ImageView) findViewById(R.id.imageViewLeft);
-                        Toast.makeText(MainActivity.this, "Ganaste Premio", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(MainActivity.this, "Ganaste Premio", Toast.LENGTH_SHORT).show();
                         int resource = imagenesID[rgenerador.nextInt(imagenesID.length)];
                         iv.setImageResource(resource);
                         getRight().setClickable(false);
                         getLeft().setClickable(false);
                         getCenter().setClickable(false);
+                        titleC.setText("¡Felicidades, ganaste!!!!");
+                        Log.e("ques Q", String.valueOf(resource));
 
                     }
                 });
                 break;
 
             case R.id.imageViewRight:
-                getLeft().setOnClickListener(new OnClickListener() {
+                getRight().setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Integer q = imagenesID[rgenerador.nextInt(imagenesID.length)];
                         final ImageView iv = (ImageView) findViewById(R.id.imageViewRight);
-                        Toast.makeText(MainActivity.this, "Ganaste Premio", Toast.LENGTH_SHORT).show();
+
                         int resource = imagenesID[rgenerador.nextInt(imagenesID.length)];
                         iv.setImageResource(resource);
                         getRight().setClickable(false);
                         getLeft().setClickable(false);
                         getCenter().setClickable(false);
+                        titleC.setText("¡Felicidades, ganaste!!!!");
 
+                        Log.e("ques imaQ", String.valueOf(iv));
+                       
                     }
                 });
+                break;
+
+            case R.id.imageViewReplay:
+
+
+                this.recreate();
+
+
                 break;
         }
 
@@ -144,6 +155,8 @@ public class MainActivity extends AppCompatActivity {
     public ImageView getLeft(){
         return left;
     }
+
+
 
 
 }
